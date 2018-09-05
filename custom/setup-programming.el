@@ -8,7 +8,7 @@
 ;; use space to indent by default
 ;; (setq-default indent-tabs-mode nil)
 
-;; set appearance of a tab that is represented by 4 spaces 
+;; set appearance of a tab that is represented by 4 spaces
 ;; (setq-default tab-width 4)
 
 ;;; Preferred Indentation configuration ends
@@ -45,11 +45,28 @@
                                    (inline-open          . 0)
                                    (innamespace          . 0)
                                    ))))
-;; was "gnu"
+;; was "gnu"e
 (setq c-default-style "vmware")
+
+
+(add-hook 'python-mode-hook '(lambda ()
+                               (indent-tabs-mode . nil)
+                               (setq python-indent 3)))
+
+;; (add-hook 'python-mode-hook
+;;           (lambda ()
+;;             (setq indent-tabs-mode nil)
+;;             (setq-default indent-tabs-mode . nil)
+;;             (setq tab-width 2)
+;;             (setq-default py-indent-tabs-mode t)))
 
 ;;; VMware specific indentation settings end
 
 
+;; shows visual bar at 80 columns
+(require 'fill-column-indicator)
+(setq fci-rule-column 80)
+(add-hook 'after-change-major-mode-hook 'fci-mode)
+;; (add-hook 'prog-mode-hook (lambda() (flyspell-prog-mode)))
 
 (provide 'setup-programming)

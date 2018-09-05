@@ -43,4 +43,23 @@
   :config
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
+;; Change how emacs makes backup
+;; having lots of *~ files in every directory is annoying
+(setq backup-directory-alist `(("." . "~/.backups")))
+(setq backup-by-copying t)
+(setq delete-old-versions t
+  kept-new-versions 6
+  kept-old-versions 2
+  version-control t)
+
+;; Make switching between windows easier
+(global-set-key (kbd "C-x o") 'ace-window)
+
+(dolist (hook '(text-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+(dolist (hook '(fundamental-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+(dolist (hook '(markdown-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+
 (provide 'setup-general)

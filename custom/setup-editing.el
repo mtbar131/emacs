@@ -55,4 +55,18 @@
   :init
   (setq iedit-toggle-key-default nil))
 
+
+;; When opening a very large file switch to read-only mode
+;; by default for fast editing
+(defun my-find-file-check-make-large-file-read-only-hook ()
+  "If a file is over a given size, make the buffer read only."
+  (when (> (buffer-size) (* 1024 1024))
+    (setq buffer-read-only t)
+    (buffer-disable-undo)
+    (global-linum-mode -1)
+    (fundamental-mode)))
+
+(add-hook 'find-file-hook 'my-find-file-check-make-large-file-read-only-hook)
+
+
 (provide 'setup-editing)
