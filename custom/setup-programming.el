@@ -1,4 +1,3 @@
-
 ;;; Preferred Indentation configuration
 
 ;;; These are default indentation settings that must
@@ -14,59 +13,97 @@
 ;;; Preferred Indentation configuration ends
 
 
-;;; VMware specific indetation
-
-;; no tabs
-(setq indent-tabs-mode nil)
-(setq-default indent-tabs-mode nil)
-
-;; 3 space indent
-(setq c-basic-offset 3)
-
 ;; remove trailing whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; vmware styling?
-(c-add-style "vmware"
-             '("bsd"
-               (c-basic-offset . 3)
-               (fill-column . 80)
-               (indent-tabs-mode . nil)
-               (c-comment-only-line-offset . 0)
-               (c-hanging-braces-alist . ((substatement-open before after)))
-               (c-offsets-alist . ((topmost-intro        . 0)
-                                   (topmost-intro-cont   . 0)
-                                   (substatement         . +)
-                                   (substatement-open    . 0)
-                                   (statement-case-open  . +)
-                                   (statement-cont       . +)
-                                   (access-label         . -)
-                                   (inclass              . +)
-                                   (inline-open          . 0)
-                                   (innamespace          . 0)
-                                   ))))
-;; was "gnu"e
-(setq c-default-style "vmware")
+;; Microsoft styling
+;; (c-add-style "microsoft"
+;; 	     '("bsd"
+;; 	       (c-basic-offset . 4)
+;; 	       (fill-column . 80)
+;; 	       (indent-tabs-mode . nil)
+;; 	       ;; (c-comment-only-line-offset . 0)
+;; 	       (c-hanging-braces-alist . ((substatement-open before after)))
+;; 	       ))
+
+;; (setq c-default-style "microsoft")
 
 
-(add-hook 'python-mode-hook '(lambda ()
-                               (indent-tabs-mode . nil)
-                               (setq python-indent 3)))
-
-;; (add-hook 'python-mode-hook
-;;           (lambda ()
-;;             (setq indent-tabs-mode nil)
-;;             (setq-default indent-tabs-mode . nil)
-;;             (setq tab-width 2)
-;;             (setq-default py-indent-tabs-mode t)))
-
-;;; VMware specific indentation settings end
+;; (add-hook 'python-mode-hook '(lambda ()
+;;                                (indent-tabs-mode . nil)
+;;                                (setq python-indent 3)))
 
 
-;; shows visual bar at 80 columns
-(require 'fill-column-indicator)
-(setq fci-rule-column 80)
-(add-hook 'after-change-major-mode-hook 'fci-mode)
-;; (add-hook 'prog-mode-hook (lambda() (flyspell-prog-mode)))
+(use-package projectile
+  :ensure t
+  ;; :pin melpa-stable
+  :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode +1))
+
+
+(setq lsp-keymap-prefix (kbd "C-c l"))
+(use-package lsp-mode
+  :ensure t
+  :config
+  ;; (setq lsp-keymap-prefix (kbd "C-c l"))
+  ;; (setq lsp-go-build-flags ["-tags=functional"])
+  :commands (lsp lsp-deferred)
+  :hook (go-mode . lsp-deferred))
+
+
+;; (use-package lsp-ui
+;;   :config)
+
+;; Go mode configuration
+(setq gofmt-command "gofmt")
+(setq gofmt-args '("-s" "-w"))
+(add-hook 'before-save-hook 'gofmt-before-save)
+
+
+(use-package company
+  :ensure t
+  :bind (:map
+         global-map
+         ("C-TAB" . company-complete-common-or-cycle)
+         ;; Use hippie expand as secondary auto complete. It is useful as it is
+         ;; 'buffer-content' aware (it uses all buffers for that).
+         ;; ("M-/" . hippie-expand)
+         :map company-active-map
+         ("C-n" . company-select-next)
+         ("C-p" . company-select-previous))
+  :config
+  (setq company-idle-delay 0.05)
+  (setq company-backends '(company-capf))
+  (setq company-minimum-prefix-length 1)
+  (add-hook 'prog-mode-hook 'company-mode-on))
+
+
+(use-package treemacs
+  :ensure t
+  :defer t
+  :config
+  ;; (treeemacs-follow-mode t)
+  ;; (treemacs-filewatch-mode nil)
+  :bind
+  (
+   ("M-0"       . treemacs-select-window)
+   ("C-x t C-t" . treemacs-find-file)
+   ([f8]        . treemacs)))
+
+
+(use-package treemacs-projectile
+  :after treemacs projectile
+  :ensure t)
+
+(use-package magit)
+
+(use-package forge
+  :after magit)
+
+(add-hook 'prog-mode-hook
+	  (lambda()
+	    (flyspell-mode 1)
+	    (flyspell-prog-mode)))
 
 (provide 'setup-programming)
