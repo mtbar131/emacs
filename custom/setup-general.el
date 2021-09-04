@@ -22,6 +22,9 @@
 
 ;; load theme
 (load-theme 'wombat)
+;; (load-theme 'poet-dark)
+;; (load-theme 'solarized-wombat-dark)
+
 
 
 ;; no blinking cursor
@@ -104,6 +107,10 @@
 ;;   (setq fci-rule-column 90)
 ;;   (add-hook 'after-change-major-mode-hook 'fci-mode))
 
-(set-frame-font "Source Code Pro")
+;; (set-face-attribute 'default nil
+;; 		    :family "Source Code Pro"
+;; 		    :height 110
+;; 		    :weight 'normal
+;; 		    :width 'normal)
 
 (provide 'setup-general)

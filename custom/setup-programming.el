@@ -20,10 +20,10 @@
 ;; (c-add-style "microsoft"
 ;; 	     '("bsd"
 ;; 	       (c-basic-offset . 4)
-;; 	       (fill-column . 80)
+;; 	       (fill-column . 120)
 ;; 	       (indent-tabs-mode . nil)
 ;; 	       ;; (c-comment-only-line-offset . 0)
-;; 	       (c-hanging-braces-alist . ((substatement-open before after)))
+;; 	       ;; (c-hanging-braces-alist . ((substatement-open before after)))
 ;; 	       ))
 
 ;; (setq c-default-style "microsoft")
@@ -47,6 +47,13 @@
   :ensure t
   :config
   ;; (setq lsp-keymap-prefix (kbd "C-c l"))
+  (setq lsp-enable-snippet nil)
+  (setq lsp-gopls-codelens nil)
+  (setq lsp-enable-links nil)
+  (lsp-register-custom-settings
+   '(("gopls.staticcheck" t t)))
+  (setq lsp-enable-file-watchers nil)
+  ;; (setq lsp-log-io t)
   ;; (setq lsp-go-build-flags ["-tags=functional"])
   :commands (lsp lsp-deferred)
   :hook (go-mode . lsp-deferred))
@@ -58,7 +65,7 @@
 ;; Go mode configuration
 (setq gofmt-command "gofmt")
 (setq gofmt-args '("-s" "-w"))
-(add-hook 'before-save-hook 'gofmt-before-save)
+ (add-hook 'before-save-hook 'gofmt-before-save)
 
 
 (use-package company
@@ -85,6 +92,7 @@
   :config
   ;; (treeemacs-follow-mode t)
   ;; (treemacs-filewatch-mode nil)
+  ;; (setq treemacs-display-in-side-window nil)
   :bind
   (
    ("M-0"       . treemacs-select-window)
@@ -98,12 +106,22 @@
 
 (use-package magit)
 
+;; forge is required to access github PRs/Issues from within magit,
+;; whenever you access forge functions from within magit it will look at the
+;; `github.user` config value of that git repository and will try to access
+;; the repo by using credentials provided in the `authinfo` file below.
 (use-package forge
-  :after magit)
+  :after magit
+  :config (setq auth-sources '("~/.authinfo")))
 
 (add-hook 'prog-mode-hook
 	  (lambda()
 	    (flyspell-mode 1)
 	    (flyspell-prog-mode)))
+
+(add-hook 'nxml-mode-hook
+	  (lambda()
+	    (setq indent-tabs-mode nil)
+	    ))
 
 (provide 'setup-programming)

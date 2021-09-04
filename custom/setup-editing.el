@@ -121,4 +121,9 @@
 
 (add-hook 'find-file-hook 'my-find-file-check-make-large-file-read-only-hook)
 
+(add-hook 'markdown-mode-hook
+	  (lambda ()
+	    (setq fill-column 120)
+	    (auto-fill-mode t)))
+
 (provide 'setup-editing)
