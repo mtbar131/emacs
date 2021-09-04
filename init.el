@@ -55,24 +55,20 @@ There are two things you can do about this warning:
  '(package-selected-packages
    '(ecb doom-themes nord-theme solarized-theme poet-theme powershell flycheck jetbrains-darcula-theme srcery-theme modus-vivendi-theme gruvbox-theme monokai-theme protobuf-mode lsp-treemacs lsp-ivy treemacs go-mode fill-column-indicator magit use-package)))
 
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(lsp-face-highlight-read ((t (:background "#17A589"))))
+;;  '(lsp-face-highlight-textual ((t (:background "#2E86C1"))))
+;;  '(lsp-face-highlight-write ((t (:background "#884EA0"))))
+;;  '(lsp-ui-doc-background ((t (:background "#2E4053")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ediff-current-diff-A ((t (:background "#553333"))))
- '(ediff-current-diff-Ancestor ((t (:background "#553333"))))
- '(ediff-current-diff-B ((t (:background "#553333"))))
- '(ediff-current-diff-C ((t (:background "#553333"))))
- '(ediff-fine-diff-A ((t (:background "#aa2222"))))
- '(ediff-fine-diff-Ancestor ((t (:background "#aa2222"))))
- '(ediff-fine-diff-B ((t (:background "#aa2222"))))
- '(ediff-fine-diff-C ((t (:background "#aa2222"))))
- '(lsp-face-highlight-read ((t (:background "#17A589"))))
- '(lsp-face-highlight-textual ((t (:background "#2E86C1"))))
- '(lsp-face-highlight-write ((t (:background "#884EA0"))))
- '(lsp-ui-doc-background ((t (:background "#2E4053")))))
+ )
 
-;; VC mode is making file operations very very slow
-;; disable it entirely and use git command line
-;; (setq vc-handled-backends nil)
+

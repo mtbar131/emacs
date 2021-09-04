@@ -75,22 +75,6 @@
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer))
 
-;; (add-to-list 'exec-path "D:\\Amit\\customizations\\hunspell\\bin")
-;; (setq ispell-program-name (locate-file "hunspell"
-;; 				       exec-path exec-suffixes 'file-executable-p))
-
-;; (setq ispell-local-dictionary-alist
-;;       '((nil
-;; 	 "[[:alpha:]]"
-;; 	 "[^[:alpha:]]"
-;; 	 "[']"
-;; 	 t
-;; 	 ("-d" "en_US" "-p" "D:\\Amit\\customizations\\hunspell\\share\\hunspell\\personal.en")
-;; 	 nil
-;; 	 iso-8859-1)))
-
-(require 'ispell)
-
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
 (dolist (hook '(fundamental-mode-hook))
@@ -108,10 +92,10 @@
 ;;   (add-hook 'after-change-major-mode-hook 'fci-mode))
 
 (set-face-attribute 'default nil
-		    ;; :family "Source Code Pro"
-		    :height 100
-		    ;; :weight 'normal
-		    ;; :width 'normal
+                    :family "Source Code Pro"
+                    :height 112
+                    :weight 'normal
+                    :width 'normal
 		    )
 
 (provide 'setup-general)

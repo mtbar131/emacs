@@ -42,10 +42,13 @@
   (projectile-mode +1))
 
 
-(setq lsp-keymap-prefix (kbd "C-c l"))
+;; (setq lsp-keymap-prefix (kbd "C-c l"))
 (use-package lsp-mode
   :ensure t
   :config
+  ;; (setq lsp-log-io t)
+  (setq lsp-idle-delay 0.0)
+  (setq lsp-headerline-breadcrumb-enable t)
   ;; (setq lsp-keymap-prefix (kbd "C-c l"))
   (setq lsp-enable-snippet nil)
   (setq lsp-gopls-codelens nil)
@@ -56,11 +59,10 @@
   ;; (setq lsp-log-io t)
   (setq lsp-go-build-flags ["-tags=functional,linux,windows"])
   :commands (lsp lsp-deferred)
-  :hook (go-mode . lsp-deferred))
+  :hook ((c-mode cpp-mode go-mode java-mode) . lsp))
 
 
-;; (use-package lsp-ui
-;;   :config)
+(use-package lsp-ui)
 
 ;; Go mode configuration
 (setq gofmt-command "gofmt")
@@ -80,7 +82,7 @@
          ("C-n" . company-select-next)
          ("C-p" . company-select-previous))
   :config
-  (setq company-idle-delay 0.05)
+  (setq company-idle-delay 0.02)
   (setq company-backends '(company-capf))
   (setq company-minimum-prefix-length 1)
   (add-hook 'prog-mode-hook 'company-mode-on))
@@ -92,7 +94,7 @@
   :config
   ;; (treeemacs-follow-mode t)
   ;; (treemacs-filewatch-mode nil)
-  ;; (setq treemacs-display-in-side-window nil)
+  (setq treemacs-space-between-root-nodes nil)
   :bind
   (
    ("M-0"       . treemacs-select-window)
@@ -133,5 +135,11 @@
 ;;           (lambda ()
 ;; 	    (setq ediff-show-ancestor 't)
 ;; 	    ))
+
+(with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+  ;; (require 'dap-cpptools)
+  ;; (yas-global-mode)
+  )
 
 (provide 'setup-programming)
