@@ -41,6 +41,11 @@
   (add-hook 'text-mode 'ws-butler-mode)
   (add-hook 'fundamental-mode 'ws-butler-mode))
 
+(use-package rainbow-delimiters
+  :init
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+  )
+
 ;; PACKAGE: anzu
 ;; GROUP: Editing -> Matching -> Isearch -> Anzu
 ;; (use-package anzu

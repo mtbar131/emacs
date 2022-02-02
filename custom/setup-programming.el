@@ -54,7 +54,7 @@
    '(("gopls.staticcheck" t t)))
   (setq lsp-enable-file-watchers nil)
   ;; (setq lsp-log-io t)
-  ;; (setq lsp-go-build-flags ["-tags=functional"])
+  (setq lsp-go-build-flags ["-tags=functional,linux,windows"])
   :commands (lsp lsp-deferred)
   :hook (go-mode . lsp-deferred))
 
@@ -123,5 +123,15 @@
 	  (lambda()
 	    (setq indent-tabs-mode nil)
 	    ))
+
+(add-hook 'powershell-mode-hook
+	  (lambda()
+		(setq indent-tabs-mode nil)
+		))
+
+;; (add-hook 'ediff-load-hook
+;;           (lambda ()
+;; 	    (setq ediff-show-ancestor 't)
+;; 	    ))
 
 (provide 'setup-programming)

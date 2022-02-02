@@ -107,10 +107,11 @@
 ;;   (setq fci-rule-column 90)
 ;;   (add-hook 'after-change-major-mode-hook 'fci-mode))
 
-;; (set-face-attribute 'default nil
-;; 		    :family "Source Code Pro"
-;; 		    :height 110
-;; 		    :weight 'normal
-;; 		    :width 'normal)
+(set-face-attribute 'default nil
+		    ;; :family "Source Code Pro"
+		    :height 100
+		    ;; :weight 'normal
+		    ;; :width 'normal
+		    )
 
 (provide 'setup-general)
