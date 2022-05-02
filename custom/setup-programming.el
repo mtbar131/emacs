@@ -46,6 +46,14 @@
 (use-package lsp-mode
   :ensure t
   :config
+  ;; (setq lsp-keymap-prefix (kbd "C-c l"))
+  (setq lsp-enable-snippet nil)
+  ;; (setq lsp-gopls-codelens nil)
+  (setq lsp-enable-links nil)
+  (setq lsp-diagnostics-provider nil)
+  (lsp-register-custom-settings
+   '(("gopls.staticcheck" t t)))
+  (setq lsp-enable-file-watchers nil)
   ;; (setq lsp-log-io t)
   (setq lsp-idle-delay 0.0)
   (setq lsp-headerline-breadcrumb-enable t)
@@ -85,7 +93,7 @@
   (setq company-idle-delay 0.02)
   (setq company-backends '(company-capf))
   (setq company-minimum-prefix-length 1)
-  (add-hook 'prog-mode-hook 'company-mode-on))
+  :hook (prog-mode . company-mode))
 
 
 (use-package treemacs
@@ -116,10 +124,10 @@
   :after magit
   :config (setq auth-sources '("~/.authinfo")))
 
-(add-hook 'prog-mode-hook
-	  (lambda()
-	    (flyspell-mode 1)
-	    (flyspell-prog-mode)))
+;; (add-hook 'prog-mode-hook
+;; 	  (lambda()
+;; 	    (flyspell-mode 1)
+;; 	    (flyspell-prog-mode)))
 
 (add-hook 'nxml-mode-hook
 	  (lambda()
@@ -141,5 +149,20 @@
   ;; (require 'dap-cpptools)
   ;; (yas-global-mode)
   )
+
+(add-hook 'nxml-mode-hook
+	  (lambda()
+	    (setq indent-tabs-mode nil)
+	    ))
+
+(add-hook 'powershell-mode-hook
+	  (lambda()
+	    (setq indent-tabs-mode nil)
+		))
+
+;; (add-hook 'ediff-load-hook
+;;           (lambda ()
+;; 	    (setq ediff-show-ancestor 't)
+;; 	    ))
 
 (provide 'setup-programming)

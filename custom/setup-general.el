@@ -26,6 +26,12 @@
 ;; (load-theme 'solarized-wombat-dark)
 
 
+(set-face-attribute 'default nil
+                    :family "Source Code Pro"
+                    :height 112
+                    :weight 'normal
+                    :width 'normal
+		    )
 
 ;; no blinking cursor
 (blink-cursor-mode 0)
@@ -90,12 +96,5 @@
 ;;   :init
 ;;   (setq fci-rule-column 90)
 ;;   (add-hook 'after-change-major-mode-hook 'fci-mode))
-
-(set-face-attribute 'default nil
-                    :family "Source Code Pro"
-                    :height 112
-                    :weight 'normal
-                    :width 'normal
-		    )
 
 (provide 'setup-general)
