@@ -114,4 +114,9 @@
 		    ;; :width 'normal
 		    )
 
+;; on Windows run emacs in server mode so that we can use emacsclient for git editor and stuff.
+(when (eq system-type 'windows-nt)
+  (server-mode))
+
+
 (provide 'setup-general)

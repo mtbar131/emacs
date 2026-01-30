@@ -131,4 +131,8 @@
 	    (setq fill-column 120)
 	    (auto-fill-mode t)))
 
+;; Use ripgrep as the default grep command
+(use-package projectile-ripgrep)
+
+
 (provide 'setup-editing)
